@@ -1,0 +1,6 @@
+[
+  "Bash(pytest *)",
+  "Bash(python -m pytest *)",
+  "Bash(black *)",
+  "Bash(flake8 *)"
+]

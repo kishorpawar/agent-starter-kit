@@ -1,0 +1,7 @@
+# Config from day one, so `flake8 .` is a usable signal instead of a wall of
+# default-79-char noise that nobody can tell regressions apart from.
+[flake8]
+max-line-length = 88
+# E203/W503 conflict with black's formatting.
+extend-ignore = E203, W503
+exclude = .git, .venv, venv, __pycache__, build, dist, node_modules

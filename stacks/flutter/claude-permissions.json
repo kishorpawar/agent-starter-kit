@@ -1,0 +1,7 @@
+[
+  "Bash(flutter test*)",
+  "Bash(flutter analyze*)",
+  "Bash(dart analyze*)",
+  "Bash(dart format *)",
+  "Bash(flutter pub get)"
+]

@@ -1,0 +1,7 @@
+# Append-only task/notes files: every branch adds a block at the same boundary, so a
+# plain 3-way merge conflicts on every PR. Union merge keeps both sides instead.
+# Applies to appends only — after a merge that rewrote these files, read the result.
+tasks/todo.md      merge=union
+tasks/backlog.md   merge=union
+tasks/lessons.md   merge=union
+tasks/todo/*.md    merge=union

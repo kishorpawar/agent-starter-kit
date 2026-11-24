@@ -1,0 +1,33 @@
+# Install both stages: pre-commit install --hook-type pre-commit --hook-type pre-push
+#
+# Formatting and lint are NOT configured per language here. They run through
+# .agents/hooks/check-files.sh, the same script the agent hooks call, so an agent's
+# edit and a human's commit are checked identically. Stacks add themselves by
+# dropping a script into .agents/hooks/stacks/.
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: check-merge-conflict
+      - id: detect-private-key
+      - id: check-added-large-files
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+
+  - repo: local
+    hooks:
+      # STRICT: a missing linter fails the commit instead of passing silently.
+      # Tools must be on PATH (activate the venv / npm install first), or set
+      # AGENT_VENV for Python.
+      - id: agent-check
+        name: Format + lint (stack scripts)
+        language: system
+        entry: env AGENT_CHECK_STRICT=1 .agents/hooks/check-files.sh
+        pass_filenames: true
+
+      - id: dep-audit
+        name: Dependency vulnerability scan
+        language: script
+        entry: scripts/dep-check.sh
+        pass_filenames: false
+        stages: [pre-push]
